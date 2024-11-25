@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 function Sidebar() {
   return (
     <>
-      <aside className="flex flex-col gap-6 bg-blue-100 p-10">
+      <aside className="flex h-screen flex-col gap-6 bg-blue-100 p-10">
         <NavLink
           to="/dashboard"
           className={({ isActive }) => (isActive ? "active" : "")}

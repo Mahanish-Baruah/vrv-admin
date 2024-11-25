@@ -1,7 +1,17 @@
+import { useState } from "react";
+
 function Dashboard() {
+  const [value, setValue] = useState("");
+  console.log("rerender");
   return (
-    <div>Dashboard</div>
-  )
+    <>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </>
+  );
 }
 
-export default Dashboard
+export default Dashboard;
