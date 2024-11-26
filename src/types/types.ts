@@ -17,9 +17,3 @@ export type UserSnapshot = {
   data: UserData;
 };
 
-export type UsersState = {
-  data: UserSnapshot[];
-  loading: boolean;
-  error: string | unknown | null;
-  fetchData: () => Promise<void>;
-};

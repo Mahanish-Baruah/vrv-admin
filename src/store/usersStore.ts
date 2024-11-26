@@ -1,7 +1,15 @@
 import { create } from "zustand";
 import { db } from "../utils/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore/lite";
-import { UserData, UserSnapshot, UsersState } from "../types/types";
+import { UserData, UserSnapshot } from "../types/types";
+
+export type UsersState = {
+  data: UserSnapshot[];
+  loading: boolean;
+  error: string | unknown | null;
+  fetchData: () => Promise<void>;
+};
+
 
 const useUsersStore = create<UsersState>((set) => ({
   data: [],
