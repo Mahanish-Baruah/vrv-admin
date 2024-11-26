@@ -1,12 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useUsersStore from "../store/usersStore";
+import { FaEnvelope, FaKey, FaUser } from "react-icons/fa6";
+import useRolesStore from "../store/rolesStore";
 
 function Users() {
-  const { data, fetchData } = useUsersStore();
+  const { users, fetchUsers } = useUsersStore();
+  const { roles, fetchRoles } = useRolesStore();
+  const [role, setRole] = useState("");
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    console.log("useEffect");
+    fetchUsers();
+    fetchRoles();
+  }, []);
+
+  useEffect(() => {
+    console.log(role);
+  }, [role]);
 
   return (
     <div>
@@ -23,7 +33,7 @@ function Users() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {users.map((item, index) => (
               <tr>
                 <th>{index + 1}</th>
                 <td>{item.data.name}</td>
@@ -50,18 +60,42 @@ function Users() {
         Create User
       </button>
       <dialog id="create_user_modal" className="modal">
-        <div className="modal-box flex flex-col items-center justify-items-start">
+        <div className="modal-box flex flex-col gap-4">
           <h2 className="text-lg font-bold">Create New User</h2>
-          <div className="modal-action">
-            <form method="dialog">
-              <label className="input input-bordered">
-                <input type="text" className="grow" placeholder="Name" />
-              </label>
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Confirm</button>
-            </form>
-          </div>
+          <label className="input input-bordered flex items-center gap-2">
+            <FaUser />
+            <input type="text" className="grow" placeholder="Enter Name" />
+          </label>
+          <label className="input input-bordered flex items-center gap-2">
+            <FaEnvelope />
+            <input type="text" className="grow" placeholder="Enter Email" />
+          </label>
+          <label className="input input-bordered flex items-center gap-2">
+            <FaKey />
+            <input type="text" className="grow" placeholder="Enter Password" />
+          </label>
+          <select
+            className="select select-bordered w-full"
+            value={role}
+            onChange={(e) => {
+              setRole(e.target.value);
+              console.log(role);
+            }}
+          >
+            <option disabled selected>
+              Choose Role
+            </option>
+            {roles.map((item) => (
+              <option key={item.data.id} value={item.data.id}>
+                {item.data.id.charAt(0).toUpperCase() + item.data.id.slice(1)}
+              </option>
+            ))}
+          </select>
+          <button className="btn btn-primary">Confirm</button>
         </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
       </dialog>
     </div>
   );

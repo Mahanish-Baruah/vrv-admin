@@ -17,3 +17,12 @@ export type UserSnapshot = {
   data: UserData;
 };
 
+export type RoleData = {
+  id: string;
+  permissions: string[];
+};
+
+export type RoleSnapshot = {
+  id: string;
+  data: RoleData;
+};

@@ -4,29 +4,25 @@ import { collection, getDocs } from "firebase/firestore/lite";
 import { UserData, UserSnapshot } from "../types/types";
 
 export type UsersState = {
-  data: UserSnapshot[];
+  users: UserSnapshot[];
   loading: boolean;
   error: string | unknown | null;
-  fetchData: () => Promise<void>;
+  fetchUsers: () => Promise<void>;
 };
 
-
 const useUsersStore = create<UsersState>((set) => ({
-  data: [],
+  users: [],
   loading: false,
   error: null,
-  fetchData: async () => {
+  fetchUsers: async () => {
     set({ loading: true, error: null });
     try {
-      console.log("db: ", db);
       const querySnapshot = await getDocs(collection(db, "users"));
-      console.log("querySnapshot: ", querySnapshot);
       const fetchedData: UserSnapshot[] = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         data: doc.data() as UserData,
       }));
-      console.log(fetchedData);
-      set({ data: fetchedData, loading: false });
+      set({ users: fetchedData, loading: false });
     } catch (error) {
       console.log(error);
       if (error instanceof Error) {
