@@ -1,28 +1,19 @@
-export enum Roles {
+export enum RoleEnum {
   admin = "admin",
   manager = "manager",
   staff = "staff",
 }
 
-export type UserData = {
-  email: string;
+export type User = {
+  id: IDBValidKey;
   name: string;
+  email: string;
   password: string;
-  role: Roles;
-  uid: string;
+  role: RoleEnum;
 };
 
-export type UserSnapshot = {
-  id: string;
-  data: UserData;
-};
-
-export type RoleData = {
-  id: string;
+export type Role = {
+  id: IDBValidKey;
+  name: RoleEnum;
   permissions: string[];
-};
-
-export type RoleSnapshot = {
-  id: string;
-  data: RoleData;
 };

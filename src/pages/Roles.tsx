@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import useRolesStore from "../store/rolesStore";
+// import { useEffect } from "react";
+// import useRolesStore from "../store/rolesStore";
 
 function Roles() {
-  const { roles, fetchRoles } = useRolesStore();
+  // const { roles, fetchRoles } = useRolesStore();
 
-  useEffect(() => {
-    fetchRoles();
-  }, [fetchRoles]);
+  // useEffect(() => {
+  //   fetchRoles();
+  // }, [fetchRoles]);
 
   return (
     <div>
@@ -22,13 +22,23 @@ function Roles() {
             </tr>
           </thead>
           <tbody>
-            {roles.map((item, index) => (
-              <tr>
-                <th>{index + 1}</th>
-                <td>{item.data.id}</td>
-                <td>{item.data.permissions}</td>
-              </tr>
-            ))}
+            {/* {roles.map((item, index) => ( */}
+            <tr>
+              <th>1</th>
+              <td>Admin</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>2</th>
+              <td>Manager</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td>Staff</td>
+              <td></td>
+            </tr>
+            {/* ))} */}
           </tbody>
         </table>
       </div>
